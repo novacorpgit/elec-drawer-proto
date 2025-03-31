@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import * as go from "gojs";
 import { DiagramToolbar } from "@/components/DiagramToolbar";
@@ -73,9 +72,8 @@ const Index = () => {
             }),
             
             $(go.Panel, "Vertical", { alignment: go.Spot.Center },
-              // Circuit breaker face plate - on top of gray rectangle
+              // Circuit breaker face plate - positioned in the middle of the gray rectangle
               $(go.Panel, "Spot",
-                { margin: new go.Margin(0, 0, 30, 0) }, // Adjusted margin to position it near the top
                 $(go.Shape, "Rectangle", {
                   fill: "#2E3238", // Dark gray/black face
                   stroke: "#000000",
@@ -108,7 +106,7 @@ const Index = () => {
               
               // Terminal connections - at the bottom
               $(go.Panel, "Horizontal",
-                { alignment: go.Spot.Bottom, margin: new go.Margin(50, 0, 0, 0) },
+                { alignment: go.Spot.Bottom, margin: new go.Margin(15, 0, 0, 0) },
                 $(go.Shape, "Rectangle", {
                   fill: "#B8B8B8", 
                   stroke: "#333333",
