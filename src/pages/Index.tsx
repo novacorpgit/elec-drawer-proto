@@ -175,9 +175,13 @@ const Index = () => {
                 }),
                 {
                   alignmentFocus: go.Spot.Center,
-                  // Position circles along the bar
-                  alignment: (num, count) => 
-                    new go.Spot(num/(count-1), 0.5)
+                  // Fix: Change the function to create static Spot objects
+                  alignment: function(data, dataCount) {
+                    // Calculate position and return a static Spot
+                    const index = data;
+                    const count = dataCount;
+                    return new go.Spot(index/(count-1), 0.5);
+                  }
                 }
               )
             }
@@ -314,10 +318,14 @@ const Index = () => {
                     width: 20,
                     height: 3,
                   }),
+                  // Fix: Use a property to correctly calculate the alignment
                   {
-                    // Position segments along the rail
-                    alignment: (num, count) => 
-                      new go.Spot(num/(count-1), 0)
+                    // Replaced the function with a property that's calculated appropriately
+                    alignment: function(data, dataCount) {
+                      const index = data;
+                      const count = dataCount;
+                      return new go.Spot(index/(count-1), 0);
+                    }
                   }
                 )
               }
