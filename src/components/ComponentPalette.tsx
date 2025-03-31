@@ -15,6 +15,8 @@ export const ComponentPalette = ({ onAddComponent }: ComponentPaletteProps) => {
     { id: "Terminal", name: "Terminal", color: "#DBEAFE" },
     { id: "DINRail", name: "DIN Rail", color: "#E5E7EB" },
     { id: "Contactor", name: "Contactor", color: "#F3E8FF" },
+    { id: "NSX250", name: "NSX 250 Breaker", color: "#C8C8C9" },
+    { id: "Chassis250A", name: "250A Chassis", color: "#9F9EA1" },
     { id: "Enclosure", name: "Enclosure", color: "#FFFFFF" }
   ];
 

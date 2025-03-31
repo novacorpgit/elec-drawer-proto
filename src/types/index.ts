@@ -22,3 +22,14 @@ export interface ComponentData {
   loc?: string;
   size?: string;
 }
+
+export interface SchneiderProduct {
+  id: string;
+  model: string;
+  type: string;
+  rating: string;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+}

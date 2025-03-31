@@ -164,6 +164,122 @@ const Index = () => {
         )
       );
 
+      // Define template for Schneider NSX 250 Breaker
+      myDiagram.nodeTemplateMap.add("NSX250",
+        $(go.Node, "Spot",
+          {
+            resizable: false,
+            locationSpot: go.Spot.Center
+          },
+          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+          $(go.Panel, "Vertical",
+            $(go.Shape, "Rectangle", {
+              fill: "#C8C8C9", // Silver-gray color similar to Schneider breakers
+              stroke: "#333333",
+              strokeWidth: 1,
+              width: 80,
+              height: 120
+            }),
+            // Main breaker toggle part 
+            $(go.Panel, "Spot",
+              $(go.Shape, "Rectangle", {
+                fill: "#222222", // Dark gray for the breaker face
+                stroke: "#000000",
+                strokeWidth: 0.5,
+                width: 60,
+                height: 30,
+                margin: new go.Margin(5, 0, 0, 0),
+                alignment: go.Spot.Top
+              }),
+              // Operating handle
+              $(go.Shape, "Rectangle", {
+                fill: "#ea384c", // Red toggle
+                stroke: "#000000",
+                strokeWidth: 0.5,
+                width: 20,
+                height: 15,
+                alignment: go.Spot.Top
+              })
+            ),
+            // Terminals
+            $(go.Panel, "Horizontal", 
+              { alignment: go.Spot.Bottom, margin: new go.Margin(5, 0, 0, 0) },
+              $(go.Shape, "Rectangle", {
+                fill: "#C8C8C9",
+                stroke: "#333333", 
+                width: 15, 
+                height: 8
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#C8C8C9", 
+                stroke: "#333333", 
+                width: 15, 
+                height: 8,
+                margin: new go.Margin(0, 5, 0, 5)
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#C8C8C9", 
+                stroke: "#333333", 
+                width: 15, 
+                height: 8
+              })
+            ),
+            $(go.TextBlock, "NSX 250", { 
+              margin: new go.Margin(5, 0, 0, 0), 
+              font: "bold 9pt sans-serif",
+              alignment: go.Spot.Bottom
+            })
+          )
+        )
+      );
+
+      // Define template for Schneider 250A Chassis
+      myDiagram.nodeTemplateMap.add("Chassis250A",
+        $(go.Node, "Auto",
+          {
+            resizable: false,
+            locationSpot: go.Spot.Center
+          },
+          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+          $(go.Panel, "Vertical",
+            $(go.Shape, "Rectangle", {
+              fill: "#9F9EA1", // Silver-gray color for chassis
+              stroke: "#333333",
+              strokeWidth: 1.5,
+              width: 100,
+              height: 140
+            }),
+            // Mounting holes
+            $(go.Panel, "Horizontal", 
+              { alignment: go.Spot.TopCenter, margin: new go.Margin(10, 0, 0, 0) },
+              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6 }),
+              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6, margin: new go.Margin(0, 70, 0, 0) })
+            ),
+            // Bottom mounting holes
+            $(go.Panel, "Horizontal", 
+              { alignment: go.Spot.BottomCenter, margin: new go.Margin(0, 0, 10, 0) },
+              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6 }),
+              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6, margin: new go.Margin(0, 70, 0, 0) })
+            ),
+            // Connection points
+            $(go.Panel, "Vertical", 
+              { alignment: go.Spot.Center },
+              $(go.Panel, "Horizontal",
+                $(go.Shape, "Rectangle", { fill: "#AAADB0", stroke: "#333333", width: 60, height: 10 })
+              ),
+              $(go.Panel, "Horizontal", { margin: new go.Margin(10, 0, 0, 0) },
+                $(go.Shape, "Rectangle", { fill: "#AAADB0", stroke: "#333333", width: 60, height: 10 })
+              )
+            ),
+            $(go.TextBlock, "250A Chassis", { 
+              margin: new go.Margin(5, 0, 0, 0), 
+              font: "9pt sans-serif",
+              alignment: go.Spot.Bottom
+            })
+          )
+        )
+      );
+
       // Handle node selection to update the properties panel
       myDiagram.addDiagramListener("ChangedSelection", (e) => {
         const node = e.diagram.selection.first();
