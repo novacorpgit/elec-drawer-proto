@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import * as go from "gojs";
 import { DiagramToolbar } from "@/components/DiagramToolbar";
@@ -62,7 +63,7 @@ const Index = () => {
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
           $(go.Panel, "Vertical",
-            // Main body - gray background
+            // Main body - gray background (now behind everything)
             $(go.Shape, "Rectangle", {
               fill: "#E0E0E0", // Light gray background
               stroke: "#333333",
@@ -71,33 +72,9 @@ const Index = () => {
               height: 130
             }),
             
-            // Terminal connections - now at the top
-            $(go.Panel, "Horizontal",
-              { alignment: go.Spot.Top, margin: 5 },
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333",
-                width: 15,
-                height: 8
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 15,
-                height: 8,
-                margin: new go.Margin(0, 10, 0, 10)
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 15,
-                height: 8
-              })
-            ),
-            
-            // Circuit breaker face plate - moved to middle
+            // Circuit breaker face plate - on top of gray rectangle
             $(go.Panel, "Spot",
-              { margin: new go.Margin(15, 0, 0, 0) }, // Add some spacing from the top
+              { margin: new go.Margin(5, 0, 0, 0) }, // Add some spacing from the top
               $(go.Shape, "Rectangle", {
                 fill: "#2E3238", // Dark gray/black face
                 stroke: "#000000",
@@ -126,6 +103,30 @@ const Index = () => {
                 stroke: "white",
                 font: "8pt sans-serif",
                 alignment: new go.Spot(0.5, 0.8)
+              })
+            ),
+            
+            // Terminal connections - now at the bottom
+            $(go.Panel, "Horizontal",
+              { alignment: go.Spot.Bottom, margin: 5 },
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333",
+                width: 15,
+                height: 8
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 15,
+                height: 8,
+                margin: new go.Margin(0, 10, 0, 10)
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 15,
+                height: 8
               })
             ),
             
