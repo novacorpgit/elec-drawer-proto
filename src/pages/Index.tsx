@@ -173,15 +173,11 @@ const Index = () => {
                   height: 6,
                   alignment: go.Spot.Center,
                 }),
+                // Fix: Pre-calculate the spots and use them directly
                 {
                   alignmentFocus: go.Spot.Center,
-                  // Fix: Change the function to create static Spot objects
-                  alignment: function(data, dataCount) {
-                    // Calculate position and return a static Spot
-                    const index = data;
-                    const count = dataCount;
-                    return new go.Spot(index/(count-1), 0.5);
-                  }
+                  // We use a fixed alignment based on the data index
+                  alignment: new go.Spot(0, 0.5, 0, 0)  // Default position, will be updated in Panel.itemArray changed
                 }
               )
             }
@@ -318,14 +314,10 @@ const Index = () => {
                     width: 20,
                     height: 3,
                   }),
-                  // Fix: Use a property to correctly calculate the alignment
+                  // Fix: Use a fixed spot instead of a function
                   {
-                    // Replaced the function with a property that's calculated appropriately
-                    alignment: function(data, dataCount) {
-                      const index = data;
-                      const count = dataCount;
-                      return new go.Spot(index/(count-1), 0);
-                    }
+                    // We use a default alignment that will be updated when the panel is created
+                    alignment: new go.Spot(0, 0, 0, 0)  // Default position, will be updated in Panel.itemArray changed
                   }
                 )
               }
@@ -543,6 +535,56 @@ const Index = () => {
           )
         )
       );
+      
+      // Add event listener to update positions for bus bar connection points and DIN rail segments
+      myDiagram.addDiagramListener("InitialLayoutCompleted", (e) => {
+        myDiagram.nodes.each(node => {
+          if (node.data.category === "BusBar" || node.data.category === "DINRail") {
+            updatePositions(node);
+          }
+        });
+      });
+
+      // Add event listener to update positions when nodes are resized
+      myDiagram.addDiagramListener("SelectionMoved", (e) => {
+        e.diagram.selection.each(node => {
+          if (node.data.category === "BusBar" || node.data.category === "DINRail") {
+            updatePositions(node);
+          }
+        });
+      });
+      
+      myDiagram.addDiagramListener("SelectionResized", (e) => {
+        e.diagram.selection.each(node => {
+          if (node.data.category === "BusBar" || node.data.category === "DINRail") {
+            updatePositions(node);
+          }
+        });
+      });
+      
+      // Function to update connection points positions
+      function updatePositions(node) {
+        if (!node) return;
+        
+        // Find the panel with itemArray binding - for both BusBar and DINRail
+        let panel = null;
+        if (node.data.category === "BusBar") {
+          panel = node.findObject("SHAPE").panel.findObject("Panel1");
+        } else if (node.data.category === "DINRail") {
+          panel = node.findObject("PANEL").findObject("Panel1");
+        }
+        
+        if (!panel || !panel.itemArray || panel.itemArray.length <= 1) return;
+        
+        // Update each item's alignment based on its position in the array
+        panel.elements.each((item, i) => {
+          if (item instanceof go.Panel) {
+            const fraction = panel.itemArray.length <= 1 ? 0.5 : i / (panel.itemArray.length - 1);
+            const yPos = node.data.category === "BusBar" ? 0.5 : 0;
+            item.alignment = new go.Spot(fraction, yPos);
+          }
+        });
+      }
 
       // Handle node selection to update the properties panel
       myDiagram.addDiagramListener("ChangedSelection", (e) => {
