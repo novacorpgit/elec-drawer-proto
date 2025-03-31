@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import * as go from "gojs";
 import { DiagramToolbar } from "@/components/DiagramToolbar";
@@ -434,7 +433,8 @@ const Index = () => {
             locationSpot: go.Spot.Center
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Panel, "Vertical",
+          $(go.Panel, "Spot", // Using Spot panel for proper layering
+            // Base gray box - this is now the background for everything
             $(go.Shape, "Rectangle", {
               fill: "#C8C8C9", // Silver-gray color similar to Schneider breakers
               stroke: "#333333",
@@ -442,56 +442,59 @@ const Index = () => {
               width: 80,
               height: 120
             }),
-            // Main breaker toggle part 
-            $(go.Panel, "Spot",
+            
+            // Main breaker content panel - centered on the gray background
+            $(go.Panel, "Vertical", { alignment: go.Spot.Center },
+              // Main breaker face - the black part
               $(go.Shape, "Rectangle", {
-                fill: "#222222", // Dark gray for the breaker face
+                fill: "#222222", // Dark gray/black for the breaker face
                 stroke: "#000000",
                 strokeWidth: 0.5,
                 width: 60,
                 height: 30,
-                margin: new go.Margin(5, 0, 0, 0),
-                alignment: go.Spot.Top
+                margin: new go.Margin(0, 0, 20, 0) // Add margin to position it properly
               }),
-              // Operating handle
+              
+              // Operating handle - centered on the black face
               $(go.Shape, "Rectangle", {
                 fill: "#ea384c", // Red toggle
                 stroke: "#000000",
                 strokeWidth: 0.5,
                 width: 20,
                 height: 15,
-                alignment: go.Spot.Top
-              })
-            ),
-            // Terminals
-            $(go.Panel, "Horizontal", 
-              { alignment: go.Spot.Bottom, margin: new go.Margin(5, 0, 0, 0) },
-              $(go.Shape, "Rectangle", {
-                fill: "#C8C8C9",
-                stroke: "#333333", 
-                width: 15, 
-                height: 8
+                margin: new go.Margin(0, 0, 25, 0) // Position it on the black part
               }),
-              $(go.Shape, "Rectangle", {
-                fill: "#C8C8C9", 
-                stroke: "#333333", 
-                width: 15, 
-                height: 8,
-                margin: new go.Margin(0, 5, 0, 5)
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#C8C8C9", 
-                stroke: "#333333", 
-                width: 15, 
-                height: 8
-              })
+              
+              // Terminals - at the bottom of the panel
+              $(go.Panel, "Horizontal", 
+                { margin: new go.Margin(30, 0, 0, 0) }, // Add some space between breaker and terminals
+                $(go.Shape, "Rectangle", {
+                  fill: "#C8C8C9",
+                  stroke: "#333333", 
+                  width: 15, 
+                  height: 8
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#C8C8C9", 
+                  stroke: "#333333", 
+                  width: 15, 
+                  height: 8,
+                  margin: new go.Margin(0, 5, 0, 5)
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#C8C8C9", 
+                  stroke: "#333333", 
+                  width: 15, 
+                  height: 8
+                })
+              )
             )
           ),
-          // Move the NSX250 label to the bottom of the component as a separate element
+          // NSX 250 label at the bottom of the component
           $(go.TextBlock, "NSX 250", { 
             margin: new go.Margin(0, 0, 0, 0),
             alignment: new go.Spot(0.5, 1, 0, 15), // Position below the component
-            font: "bold 9pt sans-serif"
+            font: "bold 10pt sans-serif" // Made text slightly larger for better visibility
           })
         )
       );
