@@ -545,7 +545,7 @@ const Index = () => {
         });
       });
 
-      // Add event listener to update positions when nodes are resized
+      // Add event listener to update positions when nodes are moved
       myDiagram.addDiagramListener("SelectionMoved", (e) => {
         e.diagram.selection.each(node => {
           if (node.data.category === "BusBar" || node.data.category === "DINRail") {
@@ -554,13 +554,29 @@ const Index = () => {
         });
       });
       
-      myDiagram.addDiagramListener("SelectionResized", (e) => {
-        e.diagram.selection.each(node => {
+      // Fix: Replace 'SelectionResized' with the correct event name for object resizing
+      // Using 'ObjectSingleClicked' to update after resize handle is released
+      myDiagram.addDiagramListener("ObjectSingleClicked", (e) => {
+        if (e.subject.part instanceof go.Node) {
+          const node = e.subject.part;
           if (node.data.category === "BusBar" || node.data.category === "DINRail") {
             updatePositions(node);
           }
-        });
+        }
       });
+      
+      // Add another event listener for continuous updates during resize
+      myDiagram.toolManager.resizingTool.doMouseMove = function() {
+        // Call the base method
+        go.ResizingTool.prototype.doMouseMove.call(this);
+        
+        // Get the node being resized
+        const node = this.adornedObject?.part;
+        if (node instanceof go.Node && 
+            (node.data.category === "BusBar" || node.data.category === "DINRail")) {
+          updatePositions(node);
+        }
+      };
       
       // Function to update connection points positions
       function updatePositions(node) {
