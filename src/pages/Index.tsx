@@ -54,26 +54,87 @@ const Index = () => {
         )
       );
 
-      // Define template for ACB (Air Circuit Breaker)
+      // Define realistic template for ACB (Air Circuit Breaker)
       myDiagram.nodeTemplateMap.add("ACB",
-        $(go.Node, "Auto",
+        $(go.Node, "Spot",
           {
             resizable: false,
             locationSpot: go.Spot.Center
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Shape, "Rectangle", {
-            fill: "#D1FAE5",
-            stroke: "#064E3B",
-            strokeWidth: 2,
-            width: 60,
-            height: 40
-          }),
-          $(go.TextBlock, "ACB", { margin: 5, font: "bold 10pt sans-serif" })
+          $(go.Panel, "Vertical",
+            $(go.Shape, "Rectangle", {
+              fill: "#E0E0E0", // Light gray background
+              stroke: "#333333",
+              strokeWidth: 1.5,
+              width: 80,
+              height: 130
+            }),
+            // Circuit breaker face plate
+            $(go.Panel, "Spot",
+              $(go.Shape, "Rectangle", {
+                fill: "#2E3238", // Dark gray/black face
+                stroke: "#000000",
+                strokeWidth: 1,
+                width: 70,
+                height: 100,
+                margin: new go.Margin(5, 0, 0, 0),
+                alignment: go.Spot.Top
+              }),
+              // Operating handle
+              $(go.Shape, "Rectangle", {
+                fill: "#FF0000", // Red handle
+                stroke: "#000000",
+                strokeWidth: 1,
+                width: 20,
+                height: 15,
+                alignment: new go.Spot(0.5, 0.3)
+              }),
+              // Label for ON/OFF
+              $(go.TextBlock, "I/O", { 
+                stroke: "white",
+                font: "bold 10pt sans-serif",
+                alignment: new go.Spot(0.5, 0.6)
+              }),
+              // Rating label
+              $(go.TextBlock, "3200A", { 
+                stroke: "white",
+                font: "8pt sans-serif",
+                alignment: new go.Spot(0.5, 0.8)
+              })
+            ),
+            // Terminal connections
+            $(go.Panel, "Horizontal",
+              { alignment: go.Spot.Bottom, margin: 5 },
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333",
+                width: 15,
+                height: 8
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 15,
+                height: 8,
+                margin: new go.Margin(0, 10, 0, 10)
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 15,
+                height: 8
+              })
+            ),
+            $(go.TextBlock, "ACB", { 
+              margin: 5,
+              font: "bold 10pt sans-serif"
+            })
+          )
         )
       );
 
-      // Define template for Bus Bar
+      // Define realistic template for Bus Bar
       myDiagram.nodeTemplateMap.add("BusBar",
         $(go.Node, "Auto",
           {
@@ -85,15 +146,51 @@ const Index = () => {
           new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
           $(go.Shape, "Rectangle", {
             name: "SHAPE",
-            fill: "#FEF3C7",
-            stroke: "#92400E",
-            strokeWidth: 2,
+            fill: "#FFD700", // Gold color for copper
+            stroke: "#B8860B", // Darker gold for outline
+            strokeWidth: 1,
+            height: 10, // Default thin height for busbar
           }),
-          $(go.TextBlock, "Bus Bar", { margin: 5, font: "10pt sans-serif" })
+          // Connection points along the bar
+          $(go.Panel, "Horizontal",
+            { alignment: go.Spot.Center },
+            new go.Binding("itemArray", "size", (size) => {
+              const sizeParts = size.split(" ");
+              const width = parseInt(sizeParts[0] || "200");
+              const numPoints = Math.max(2, Math.floor(width / 50));
+              const points = [];
+              for (let i = 0; i < numPoints; i++) {
+                points.push(i);
+              }
+              return points;
+            }),
+            {
+              itemTemplate: $(go.Panel, "Spot",
+                $(go.Shape, "Circle", {
+                  fill: "#B8860B",
+                  stroke: null,
+                  width: 6,
+                  height: 6,
+                  alignment: go.Spot.Center,
+                }),
+                {
+                  alignmentFocus: go.Spot.Center,
+                  // Position circles along the bar
+                  alignment: (num, count) => 
+                    new go.Spot(num/(count-1), 0.5)
+                }
+              )
+            }
+          ),
+          $(go.TextBlock, { 
+            margin: new go.Margin(15, 5, 0, 5),
+            font: "9pt sans-serif",
+          },
+          new go.Binding("text", "name"))
         )
       );
 
-      // Define template for Terminal Block
+      // Define realistic template for Terminal Block
       myDiagram.nodeTemplateMap.add("Terminal",
         $(go.Node, "Auto",
           {
@@ -101,22 +198,84 @@ const Index = () => {
             locationSpot: go.Spot.Center
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Shape, "Rectangle", {
-            fill: "#DBEAFE",
-            stroke: "#1E40AF",
-            strokeWidth: 1,
-            width: 30,
-            height: 20
-          }),
-          $(go.TextBlock, "T", { 
-            margin: 2, 
-            font: "bold 8pt sans-serif",
-            alignment: go.Spot.Center 
-          })
+          $(go.Panel, "Table",
+            { defaultRowSeparatorStroke: "#111111" },
+            // Terminal body
+            $(go.RowColumnDefinition, { column: 0, width: 40 }),
+            $(go.RowColumnDefinition, { column: 1, width: 40 }),
+            
+            // First terminal
+            $(go.Shape, "Rectangle", { 
+              row: 0, column: 0,
+              fill: "#DBEAFE", // Light blue
+              stroke: "#1E40AF", // Darker blue
+              strokeWidth: 1,
+              height: 25
+            }),
+            $(go.Shape, "Rectangle", { 
+              row: 0, column: 1,
+              fill: "#DBEAFE",  
+              stroke: "#1E40AF",
+              strokeWidth: 1,
+              height: 25
+            }),
+            
+            // Second terminal
+            $(go.Shape, "Rectangle", { 
+              row: 1, column: 0,
+              fill: "#DBEAFE", 
+              stroke: "#1E40AF",
+              strokeWidth: 1,
+              height: 25
+            }),
+            $(go.Shape, "Rectangle", { 
+              row: 1, column: 1,
+              fill: "#DBEAFE", 
+              stroke: "#1E40AF",
+              strokeWidth: 1,
+              height: 25
+            }),
+            
+            // Terminal screws
+            $(go.Shape, "Circle", { 
+              row: 0, column: 0, 
+              fill: "#333333",
+              width: 8, height: 8,
+              alignment: go.Spot.Center
+            }),
+            $(go.Shape, "Circle", { 
+              row: 0, column: 1, 
+              fill: "#333333",
+              width: 8, height: 8,
+              alignment: go.Spot.Center
+            }),
+            $(go.Shape, "Circle", { 
+              row: 1, column: 0, 
+              fill: "#333333",
+              width: 8, height: 8,
+              alignment: go.Spot.Center
+            }),
+            $(go.Shape, "Circle", { 
+              row: 1, column: 1, 
+              fill: "#333333",
+              width: 8, height: 8,
+              alignment: go.Spot.Center
+            }),
+            
+            // Label at the bottom
+            $(go.TextBlock, "Terminal", {
+              row: 2,
+              column: 0,
+              columnSpan: 2,
+              margin: new go.Margin(5, 0, 0, 0),
+              font: "9pt sans-serif",
+              alignment: go.Spot.Center
+            })
+          )
         )
       );
 
-      // Define template for DIN Rail
+      // Define realistic template for DIN Rail
       myDiagram.nodeTemplateMap.add("DINRail",
         $(go.Node, "Auto",
           {
@@ -126,22 +285,53 @@ const Index = () => {
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
           new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
-          $(go.Shape, "Rectangle", {
-            name: "SHAPE",
-            fill: "#E5E7EB",
-            stroke: "#4B5563",
-            strokeWidth: 1,
-            height: 10
-          }),
-          $(go.TextBlock, "DIN Rail", { 
-            margin: 5, 
-            font: "8pt sans-serif",
-            alignment: go.Spot.Center
-          })
+          $(go.Panel, "Vertical", { name: "PANEL" },
+            $(go.Shape, "Rectangle", {
+              name: "SHAPE",
+              fill: "#C8C8C9", // Metallic gray
+              stroke: "#4B5563",
+              strokeWidth: 1,
+              height: 7
+            }),
+            // Rail lip details
+            $(go.Panel, "Horizontal", 
+              { alignment: go.Spot.Top },
+              new go.Binding("itemArray", "size", (size) => {
+                const sizeParts = size.split(" ");
+                const width = parseInt(sizeParts[0] || "200");
+                const numSegments = Math.max(4, Math.floor(width / 25));
+                const segments = [];
+                for (let i = 0; i < numSegments; i++) {
+                  segments.push(i);
+                }
+                return segments;
+              }),
+              {
+                itemTemplate: $(go.Panel, "Auto",
+                  $(go.Shape, "Rectangle", {
+                    fill: "#9CA3AF",
+                    stroke: null,
+                    width: 20,
+                    height: 3,
+                  }),
+                  {
+                    // Position segments along the rail
+                    alignment: (num, count) => 
+                      new go.Spot(num/(count-1), 0)
+                  }
+                )
+              }
+            ),
+            $(go.TextBlock, "DIN Rail", { 
+              margin: new go.Margin(10, 0, 0, 0),
+              font: "9pt sans-serif",
+              alignment: go.Spot.Bottom
+            })
+          )
         )
       );
 
-      // Define template for Contactor
+      // Define realistic template for Contactor
       myDiagram.nodeTemplateMap.add("Contactor",
         $(go.Node, "Auto",
           {
@@ -149,18 +339,84 @@ const Index = () => {
             locationSpot: go.Spot.Center
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Shape, "Rectangle", {
-            fill: "#F3E8FF",
-            stroke: "#6B21A8",
-            strokeWidth: 1.5,
-            width: 40,
-            height: 40
-          }),
-          $(go.TextBlock, "C", { 
-            margin: 2, 
-            font: "bold 10pt sans-serif",
-            alignment: go.Spot.Center 
-          })
+          $(go.Panel, "Vertical",
+            // Main contactor body
+            $(go.Shape, "Rectangle", {
+              fill: "#E6E6FA", // Lavender color
+              stroke: "#6B21A8",
+              strokeWidth: 1.5,
+              width: 60,
+              height: 80
+            }),
+            
+            // Terminal connections - top row
+            $(go.Panel, "Horizontal", 
+              { alignment: go.Spot.Top, margin: new go.Margin(0, 0, 0, 0) },
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 10, 
+                height: 5
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 10, 
+                height: 5,
+                margin: new go.Margin(0, 10, 0, 10)
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 10, 
+                height: 5
+              })
+            ),
+            
+            // Middle section with model number
+            $(go.Panel, "Spot", 
+              { alignment: go.Spot.Center, margin: new go.Margin(10, 0, 10, 0) },
+              $(go.Shape, "Rectangle", {
+                fill: "#F3E8FF", // Lighter purple
+                stroke: "#6B21A8",
+                strokeWidth: 1,
+                width: 50,
+                height: 30
+              }),
+              $(go.TextBlock, "LC1D", { 
+                font: "bold 10pt sans-serif"
+              })
+            ),
+            
+            // Bottom terminals
+            $(go.Panel, "Horizontal", 
+              { alignment: go.Spot.Bottom, margin: new go.Margin(0, 0, 0, 0) },
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 10, 
+                height: 5
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 10, 
+                height: 5,
+                margin: new go.Margin(0, 10, 0, 10)
+              }),
+              $(go.Shape, "Rectangle", {
+                fill: "#B8B8B8", 
+                stroke: "#333333", 
+                width: 10, 
+                height: 5
+              })
+            ),
+            
+            $(go.TextBlock, "Contactor", { 
+              margin: new go.Margin(5, 0, 0, 0),
+              font: "9pt sans-serif"
+            })
+          )
         )
       );
 
