@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import * as go from "gojs";
 import { DiagramToolbar } from "@/components/DiagramToolbar";
@@ -129,8 +130,10 @@ const Index = () => {
               )
             ),
             
+            // Move the ACB label to the bottom outside the panel
             $(go.TextBlock, "ACB", { 
-              margin: new go.Margin(135, 0, 0, 0),
+              margin: new go.Margin(0, 0, -20, 0), // Negative bottom margin to move it below
+              alignment: new go.Spot(0.5, 1, 0, 20), // Position at the bottom with some offset
               font: "bold 10pt sans-serif"
             })
           )
@@ -482,13 +485,14 @@ const Index = () => {
                 width: 15, 
                 height: 8
               })
-            ),
-            $(go.TextBlock, "NSX 250", { 
-              margin: new go.Margin(5, 0, 0, 0), 
-              font: "bold 9pt sans-serif",
-              alignment: go.Spot.Bottom
-            })
-          )
+            )
+          ),
+          // Move the NSX250 label to the bottom of the component as a separate element
+          $(go.TextBlock, "NSX 250", { 
+            margin: new go.Margin(0, 0, 0, 0),
+            alignment: new go.Spot(0.5, 1, 0, 15), // Position below the component
+            font: "bold 9pt sans-serif"
+          })
         )
       );
 
@@ -529,13 +533,13 @@ const Index = () => {
               $(go.Panel, "Horizontal", { margin: new go.Margin(10, 0, 0, 0) },
                 $(go.Shape, "Rectangle", { fill: "#AAADB0", stroke: "#333333", width: 60, height: 10 })
               )
-            ),
-            $(go.TextBlock, "250A Chassis", { 
-              margin: new go.Margin(5, 0, 0, 0), 
-              font: "9pt sans-serif",
-              alignment: go.Spot.Bottom
-            })
-          )
+            )
+          ),
+          // Move the Chassis label to the bottom as a separate panel element
+          $(go.TextBlock, "250A Chassis", { 
+            alignment: new go.Spot(0.5, 1, 0, 15), // Position below the component
+            font: "9pt sans-serif"
+          })
         )
       );
       
