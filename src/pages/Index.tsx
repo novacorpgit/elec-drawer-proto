@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import * as go from "gojs";
 import { DiagramToolbar } from "@/components/DiagramToolbar";
@@ -345,8 +344,8 @@ const Index = () => {
             locationSpot: go.Spot.Center
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Panel, "Vertical",
-            // Main contactor body
+          $(go.Panel, "Spot", // Changed from Vertical to Spot for proper layering
+            // Main contactor body - this is now the background
             $(go.Shape, "Rectangle", {
               fill: "#E6E6FA", // Lavender color
               stroke: "#6B21A8",
@@ -355,74 +354,77 @@ const Index = () => {
               height: 80
             }),
             
-            // Terminal connections - top row
-            $(go.Panel, "Horizontal", 
-              { alignment: go.Spot.Top, margin: new go.Margin(0, 0, 0, 0) },
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 10, 
-                height: 5
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 10, 
-                height: 5,
-                margin: new go.Margin(0, 10, 0, 10)
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 10, 
-                height: 5
-              })
-            ),
-            
-            // Middle section with model number
-            $(go.Panel, "Spot", 
-              { alignment: go.Spot.Center, margin: new go.Margin(10, 0, 10, 0) },
-              $(go.Shape, "Rectangle", {
-                fill: "#F3E8FF", // Lighter purple
-                stroke: "#6B21A8",
-                strokeWidth: 1,
-                width: 50,
-                height: 30
-              }),
-              $(go.TextBlock, "LC1D", { 
-                font: "bold 10pt sans-serif"
-              })
-            ),
-            
-            // Bottom terminals
-            $(go.Panel, "Horizontal", 
-              { alignment: go.Spot.Bottom, margin: new go.Margin(0, 0, 0, 0) },
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 10, 
-                height: 5
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 10, 
-                height: 5,
-                margin: new go.Margin(0, 10, 0, 10)
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 10, 
-                height: 5
-              })
-            ),
-            
-            $(go.TextBlock, "Contactor", { 
-              margin: new go.Margin(5, 0, 0, 0),
-              font: "9pt sans-serif"
-            })
-          )
+            // Main content panel centered on the lavender background
+            $(go.Panel, "Vertical", { alignment: go.Spot.Center },
+              // Terminal connections - top row
+              $(go.Panel, "Horizontal", 
+                { margin: new go.Margin(0, 0, 0, 0) },
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 10, 
+                  height: 5
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 10, 
+                  height: 5,
+                  margin: new go.Margin(0, 10, 0, 10)
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 10, 
+                  height: 5
+                })
+              ),
+              
+              // Middle section with model number
+              $(go.Panel, "Spot", 
+                { margin: new go.Margin(15, 0, 15, 0) },
+                $(go.Shape, "Rectangle", {
+                  fill: "#F3E8FF", // Lighter purple
+                  stroke: "#6B21A8",
+                  strokeWidth: 1,
+                  width: 50,
+                  height: 30
+                }),
+                $(go.TextBlock, "LC1D", { 
+                  font: "bold 10pt sans-serif"
+                })
+              ),
+              
+              // Bottom terminals
+              $(go.Panel, "Horizontal", 
+                { margin: new go.Margin(15, 0, 0, 0) },
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 10, 
+                  height: 5
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 10, 
+                  height: 5,
+                  margin: new go.Margin(0, 10, 0, 10)
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 10, 
+                  height: 5
+                })
+              )
+            )
+          ),
+          // Move the Contactor label to the bottom outside the panel
+          $(go.TextBlock, "Contactor", { 
+            alignment: new go.Spot(0.5, 1, 0, 15), // Position below the component
+            font: "bold 10pt sans-serif" // Made text slightly larger for better visibility
+          })
         )
       );
 
