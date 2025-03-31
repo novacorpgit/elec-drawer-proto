@@ -17,10 +17,13 @@ const Index = () => {
       
       const myDiagram = $(go.Diagram, diagramRef.current, {
         "undoManager.isEnabled": true,
+        grid: $(go.Panel, "Grid", 
+          { gridCellSize: new go.Size(10, 10) },
+          $(go.Shape, "LineH", { stroke: "#E5E7EB", strokeWidth: 0.5 }),
+          $(go.Shape, "LineV", { stroke: "#E5E7EB", strokeWidth: 0.5 })
+        ),
         "grid.visible": true,
-        "grid.gridCellSize": new go.Size(10, 10), // 10mm grid
         "grid.background": "white",
-        "grid.gridLineColor": "#E5E7EB",
         allowDrop: true,
         "draggingTool.dragsLink": false,
         "draggingTool.isGridSnapEnabled": true,
