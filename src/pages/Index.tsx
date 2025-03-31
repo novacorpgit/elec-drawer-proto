@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import * as go from "gojs";
 import { DiagramToolbar } from "@/components/DiagramToolbar";
@@ -507,7 +508,8 @@ const Index = () => {
             locationSpot: go.Spot.Center
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Panel, "Vertical",
+          $(go.Panel, "Spot", // Changed from Vertical to Spot for proper layering
+            // Base gray box - this is now the background for everything
             $(go.Shape, "Rectangle", {
               fill: "#9F9EA1", // Silver-gray color for chassis
               stroke: "#333333",
@@ -515,33 +517,39 @@ const Index = () => {
               width: 100,
               height: 140
             }),
-            // Mounting holes
-            $(go.Panel, "Horizontal", 
-              { alignment: go.Spot.TopCenter, margin: new go.Margin(10, 0, 0, 0) },
-              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6 }),
-              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6, margin: new go.Margin(0, 70, 0, 0) })
-            ),
-            // Bottom mounting holes
-            $(go.Panel, "Horizontal", 
-              { alignment: go.Spot.BottomCenter, margin: new go.Margin(0, 0, 10, 0) },
-              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6 }),
-              $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6, margin: new go.Margin(0, 70, 0, 0) })
-            ),
-            // Connection points
-            $(go.Panel, "Vertical", 
-              { alignment: go.Spot.Center },
-              $(go.Panel, "Horizontal",
-                $(go.Shape, "Rectangle", { fill: "#AAADB0", stroke: "#333333", width: 60, height: 10 })
+            
+            // Main content panel centered on the gray background
+            $(go.Panel, "Vertical", { alignment: go.Spot.Center },
+              // Mounting holes - top row
+              $(go.Panel, "Horizontal", 
+                { margin: new go.Margin(10, 0, 0, 0) },
+                $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6 }),
+                $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6, margin: new go.Margin(0, 70, 0, 0) })
               ),
-              $(go.Panel, "Horizontal", { margin: new go.Margin(10, 0, 0, 0) },
-                $(go.Shape, "Rectangle", { fill: "#AAADB0", stroke: "#333333", width: 60, height: 10 })
+              
+              // Connection points - centered
+              $(go.Panel, "Vertical", 
+                { margin: new go.Margin(15, 0, 15, 0) },
+                $(go.Panel, "Horizontal",
+                  $(go.Shape, "Rectangle", { fill: "#AAADB0", stroke: "#333333", width: 60, height: 10 })
+                ),
+                $(go.Panel, "Horizontal", { margin: new go.Margin(10, 0, 0, 0) },
+                  $(go.Shape, "Rectangle", { fill: "#AAADB0", stroke: "#333333", width: 60, height: 10 })
+                )
+              ),
+              
+              // Bottom mounting holes
+              $(go.Panel, "Horizontal", 
+                { margin: new go.Margin(15, 0, 0, 0) },
+                $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6 }),
+                $(go.Shape, "Circle", { fill: "#000000", width: 6, height: 6, margin: new go.Margin(0, 70, 0, 0) })
               )
             )
           ),
-          // Move the Chassis label to the bottom as a separate panel element
+          // Move the Chassis label to the bottom outside the panel
           $(go.TextBlock, "250A Chassis", { 
             alignment: new go.Spot(0.5, 1, 0, 15), // Position below the component
-            font: "9pt sans-serif"
+            font: "bold 10pt sans-serif" // Made text slightly larger for better visibility
           })
         )
       );
