@@ -62,8 +62,8 @@ const Index = () => {
             locationSpot: go.Spot.Center
           },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-          $(go.Panel, "Vertical",
-            // Main body - gray background (now behind everything)
+          $(go.Panel, "Spot", // Changed from Vertical to Spot to have proper layering
+            // Main body - gray background (behind everything)
             $(go.Shape, "Rectangle", {
               fill: "#E0E0E0", // Light gray background
               stroke: "#333333",
@@ -72,66 +72,67 @@ const Index = () => {
               height: 130
             }),
             
-            // Circuit breaker face plate - on top of gray rectangle
-            $(go.Panel, "Spot",
-              { margin: new go.Margin(5, 0, 0, 0) }, // Add some spacing from the top
-              $(go.Shape, "Rectangle", {
-                fill: "#2E3238", // Dark gray/black face
-                stroke: "#000000",
-                strokeWidth: 1,
-                width: 70,
-                height: 100,
-                alignment: go.Spot.Center
-              }),
-              // Operating handle
-              $(go.Shape, "Rectangle", {
-                fill: "#FF0000", // Red handle
-                stroke: "#000000",
-                strokeWidth: 1,
-                width: 20,
-                height: 15,
-                alignment: new go.Spot(0.5, 0.3)
-              }),
-              // Label for ON/OFF
-              $(go.TextBlock, "I/O", { 
-                stroke: "white",
-                font: "bold 10pt sans-serif",
-                alignment: new go.Spot(0.5, 0.6)
-              }),
-              // Rating label
-              $(go.TextBlock, "3200A", { 
-                stroke: "white",
-                font: "8pt sans-serif",
-                alignment: new go.Spot(0.5, 0.8)
-              })
-            ),
-            
-            // Terminal connections - now at the bottom
-            $(go.Panel, "Horizontal",
-              { alignment: go.Spot.Bottom, margin: 5 },
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333",
-                width: 15,
-                height: 8
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 15,
-                height: 8,
-                margin: new go.Margin(0, 10, 0, 10)
-              }),
-              $(go.Shape, "Rectangle", {
-                fill: "#B8B8B8", 
-                stroke: "#333333", 
-                width: 15,
-                height: 8
-              })
+            $(go.Panel, "Vertical", { alignment: go.Spot.Center },
+              // Circuit breaker face plate - on top of gray rectangle
+              $(go.Panel, "Spot",
+                { margin: new go.Margin(0, 0, 30, 0) }, // Adjusted margin to position it near the top
+                $(go.Shape, "Rectangle", {
+                  fill: "#2E3238", // Dark gray/black face
+                  stroke: "#000000",
+                  strokeWidth: 1,
+                  width: 70,
+                  height: 100
+                }),
+                // Operating handle
+                $(go.Shape, "Rectangle", {
+                  fill: "#FF0000", // Red handle
+                  stroke: "#000000",
+                  strokeWidth: 1,
+                  width: 20,
+                  height: 15,
+                  alignment: new go.Spot(0.5, 0.3)
+                }),
+                // Label for ON/OFF
+                $(go.TextBlock, "I/O", { 
+                  stroke: "white",
+                  font: "bold 10pt sans-serif",
+                  alignment: new go.Spot(0.5, 0.6)
+                }),
+                // Rating label
+                $(go.TextBlock, "3200A", { 
+                  stroke: "white",
+                  font: "8pt sans-serif",
+                  alignment: new go.Spot(0.5, 0.8)
+                })
+              ),
+              
+              // Terminal connections - at the bottom
+              $(go.Panel, "Horizontal",
+                { alignment: go.Spot.Bottom, margin: new go.Margin(50, 0, 0, 0) },
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333",
+                  width: 15,
+                  height: 8
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 15,
+                  height: 8,
+                  margin: new go.Margin(0, 10, 0, 10)
+                }),
+                $(go.Shape, "Rectangle", {
+                  fill: "#B8B8B8", 
+                  stroke: "#333333", 
+                  width: 15,
+                  height: 8
+                })
+              )
             ),
             
             $(go.TextBlock, "ACB", { 
-              margin: 5,
+              margin: new go.Margin(135, 0, 0, 0),
               font: "bold 10pt sans-serif"
             })
           )
