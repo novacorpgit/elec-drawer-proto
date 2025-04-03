@@ -38,34 +38,34 @@ export const NSX2503D = ({ component }: ComponentProps) => {
       {/* Base gray box */}
       <mesh castShadow position={[0, 0, 0]}>
         <boxGeometry args={[scale.x, scale.y, scale.z]} />
-        <meshStandardMaterial color="#C8C8C9" /> {/* Silver-gray color */}
+        <meshStandardMaterial color={"#C8C8C9"} /> {/* Silver-gray color */}
       </mesh>
       
       {/* Main breaker face - the black part */}
       <mesh castShadow position={[0, scale.y * 0.1, scale.z/2 + 0.01]}>
         <boxGeometry args={[scale.x * 0.75, scale.y * 0.25, 0.05]} />
-        <meshStandardMaterial color="#222222" /> {/* Dark gray/black for the breaker face */}
+        <meshStandardMaterial color={"#222222"} /> {/* Dark gray/black for the breaker face */}
       </mesh>
       
       {/* Operating handle */}
       <mesh castShadow position={[0, scale.y * 0.1, scale.z/2 + 0.06]}>
         <boxGeometry args={[scale.x * 0.25, scale.y * 0.15, 0.05]} />
-        <meshStandardMaterial color="#ea384c" /> {/* Red toggle */}
+        <meshStandardMaterial color={"#ea384c"} /> {/* Red toggle */}
       </mesh>
       
       {/* Terminal connections */}
       <group position={[0, -scale.y/2 - 0.05, 0]}>
         <mesh castShadow position={[-scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.2, 0.15, scale.z * 0.5]} />
-          <meshStandardMaterial color="#C8C8C9" />
+          <meshStandardMaterial color={"#C8C8C9"} />
         </mesh>
         <mesh castShadow position={[0, 0, 0]}>
           <boxGeometry args={[scale.x * 0.2, 0.15, scale.z * 0.5]} />
-          <meshStandardMaterial color="#C8C8C9" />
+          <meshStandardMaterial color={"#C8C8C9"} />
         </mesh>
         <mesh castShadow position={[scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.2, 0.15, scale.z * 0.5]} />
-          <meshStandardMaterial color="#C8C8C9" />
+          <meshStandardMaterial color={"#C8C8C9"} />
         </mesh>
       </group>
       

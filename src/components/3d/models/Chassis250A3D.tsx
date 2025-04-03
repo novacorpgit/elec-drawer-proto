@@ -38,18 +38,18 @@ export const Chassis250A3D = ({ component }: ComponentProps) => {
       {/* Base gray box */}
       <mesh castShadow position={[0, 0, 0]}>
         <boxGeometry args={[scale.x, scale.y, scale.z]} />
-        <meshStandardMaterial color="#9F9EA1" /> {/* Silver-gray color for chassis */}
+        <meshStandardMaterial color={"#9F9EA1"} /> {/* Silver-gray color for chassis */}
       </mesh>
       
       {/* Mounting holes - top row */}
       <group position={[0, scale.y * 0.4, scale.z/2 + 0.01]}>
         <mesh castShadow position={[-scale.x * 0.35, 0, 0]}>
-          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} rotation={[Math.PI/2, 0, 0]} />
-          <meshStandardMaterial color="#000000" />
+          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} />
+          <meshStandardMaterial color={"#000000"} />
         </mesh>
         <mesh castShadow position={[scale.x * 0.35, 0, 0]}>
-          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} rotation={[Math.PI/2, 0, 0]} />
-          <meshStandardMaterial color="#000000" />
+          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} />
+          <meshStandardMaterial color={"#000000"} />
         </mesh>
       </group>
       
@@ -57,23 +57,23 @@ export const Chassis250A3D = ({ component }: ComponentProps) => {
       <group position={[0, 0, scale.z/2 + 0.01]}>
         <mesh castShadow position={[0, scale.y * 0.15, 0]}>
           <boxGeometry args={[scale.x * 0.7, scale.y * 0.08, 0.05]} />
-          <meshStandardMaterial color="#AAADB0" />
+          <meshStandardMaterial color={"#AAADB0"} />
         </mesh>
         <mesh castShadow position={[0, scale.y * -0.15, 0]}>
           <boxGeometry args={[scale.x * 0.7, scale.y * 0.08, 0.05]} />
-          <meshStandardMaterial color="#AAADB0" />
+          <meshStandardMaterial color={"#AAADB0"} />
         </mesh>
       </group>
       
       {/* Bottom mounting holes */}
       <group position={[0, -scale.y * 0.4, scale.z/2 + 0.01]}>
         <mesh castShadow position={[-scale.x * 0.35, 0, 0]}>
-          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} rotation={[Math.PI/2, 0, 0]} />
-          <meshStandardMaterial color="#000000" />
+          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} />
+          <meshStandardMaterial color={"#000000"} />
         </mesh>
         <mesh castShadow position={[scale.x * 0.35, 0, 0]}>
-          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} rotation={[Math.PI/2, 0, 0]} />
-          <meshStandardMaterial color="#000000" />
+          <cylinderGeometry args={[scale.x * 0.05, scale.x * 0.05, 0.1, 16]} />
+          <meshStandardMaterial color={"#000000"} />
         </mesh>
       </group>
       

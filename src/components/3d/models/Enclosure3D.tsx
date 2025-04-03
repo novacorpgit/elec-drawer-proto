@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useHelper } from "@react-three/drei";
@@ -67,37 +68,37 @@ export const Enclosure3D = ({
         {/* Front wall (transparent) */}
         <mesh position={[0, size[1]/2, size[2]/2]} castShadow>
           <boxGeometry args={[size[0], size[1], 0.1]} />
-          <meshStandardMaterial transparent opacity={0.2} color="#9CA3AF" />
+          <meshStandardMaterial transparent={true} opacity={0.2} color={"#9CA3AF"} />
         </mesh>
         
         {/* Back wall */}
         <mesh position={[0, size[1]/2, -size[2]/2]} castShadow>
           <boxGeometry args={[size[0], size[1], 0.1]} />
-          <meshStandardMaterial color="#9CA3AF" />
+          <meshStandardMaterial color={"#9CA3AF"} />
         </mesh>
         
         {/* Left wall */}
         <mesh position={[-size[0]/2, size[1]/2, 0]} castShadow>
           <boxGeometry args={[0.1, size[1], size[2]]} />
-          <meshStandardMaterial color="#9CA3AF" />
+          <meshStandardMaterial color={"#9CA3AF"} />
         </mesh>
         
         {/* Right wall */}
         <mesh position={[size[0]/2, size[1]/2, 0]} castShadow>
           <boxGeometry args={[0.1, size[1], size[2]]} />
-          <meshStandardMaterial color="#9CA3AF" />
+          <meshStandardMaterial color={"#9CA3AF"} />
         </mesh>
         
         {/* Top */}
         <mesh position={[0, size[1], 0]} castShadow>
           <boxGeometry args={[size[0], 0.1, size[2]]} />
-          <meshStandardMaterial color="#9CA3AF" />
+          <meshStandardMaterial color={"#9CA3AF"} />
         </mesh>
         
         {/* Bottom */}
         <mesh position={[0, 0, 0]} receiveShadow>
           <boxGeometry args={[size[0], 0.1, size[2]]} />
-          <meshStandardMaterial color="#9CA3AF" />
+          <meshStandardMaterial color={"#9CA3AF"} />
         </mesh>
         
         {/* Components inside the enclosure */}
@@ -107,7 +108,7 @@ export const Enclosure3D = ({
       {/* Enclosure label */}
       <mesh position={[0, -0.3, size[2]/2 + 0.1]} rotation={[0, 0, 0]}>
         <planeGeometry args={[2, 0.5]} />
-        <meshStandardMaterial color="white" />
+        <meshStandardMaterial color={"white"} />
       </mesh>
     </group>
   );

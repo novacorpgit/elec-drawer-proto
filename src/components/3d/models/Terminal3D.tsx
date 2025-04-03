@@ -38,39 +38,39 @@ export const Terminal3D = ({ component }: ComponentProps) => {
       {/* First row of terminals */}
       <mesh castShadow position={[-scale.x/4, scale.y/4, 0]}>
         <boxGeometry args={[scale.x * 0.4, scale.y * 0.4, scale.z]} />
-        <meshStandardMaterial color="#DBEAFE" /> {/* Light blue */}
+        <meshStandardMaterial color={"#DBEAFE"} /> {/* Light blue */}
       </mesh>
       <mesh castShadow position={[scale.x/4, scale.y/4, 0]}>
         <boxGeometry args={[scale.x * 0.4, scale.y * 0.4, scale.z]} />
-        <meshStandardMaterial color="#DBEAFE" />
+        <meshStandardMaterial color={"#DBEAFE"} />
       </mesh>
       
       {/* Second row of terminals */}
       <mesh castShadow position={[-scale.x/4, -scale.y/4, 0]}>
         <boxGeometry args={[scale.x * 0.4, scale.y * 0.4, scale.z]} />
-        <meshStandardMaterial color="#DBEAFE" />
+        <meshStandardMaterial color={"#DBEAFE"} />
       </mesh>
       <mesh castShadow position={[scale.x/4, -scale.y/4, 0]}>
         <boxGeometry args={[scale.x * 0.4, scale.y * 0.4, scale.z]} />
-        <meshStandardMaterial color="#DBEAFE" />
+        <meshStandardMaterial color={"#DBEAFE"} />
       </mesh>
       
       {/* Terminal screws */}
       <mesh castShadow position={[-scale.x/4, scale.y/4, scale.z/2 + 0.03]}>
         <cylinderGeometry args={[scale.x * 0.1, scale.x * 0.1, 0.06, 16]} />
-        <meshStandardMaterial color="#333333" />
+        <meshStandardMaterial color={"#333333"} />
       </mesh>
       <mesh castShadow position={[scale.x/4, scale.y/4, scale.z/2 + 0.03]}>
         <cylinderGeometry args={[scale.x * 0.1, scale.x * 0.1, 0.06, 16]} />
-        <meshStandardMaterial color="#333333" />
+        <meshStandardMaterial color={"#333333"} />
       </mesh>
       <mesh castShadow position={[-scale.x/4, -scale.y/4, scale.z/2 + 0.03]}>
         <cylinderGeometry args={[scale.x * 0.1, scale.x * 0.1, 0.06, 16]} />
-        <meshStandardMaterial color="#333333" />
+        <meshStandardMaterial color={"#333333"} />
       </mesh>
       <mesh castShadow position={[scale.x/4, -scale.y/4, scale.z/2 + 0.03]}>
         <cylinderGeometry args={[scale.x * 0.1, scale.x * 0.1, 0.06, 16]} />
-        <meshStandardMaterial color="#333333" />
+        <meshStandardMaterial color={"#333333"} />
       </mesh>
       
       {/* Terminal label */}

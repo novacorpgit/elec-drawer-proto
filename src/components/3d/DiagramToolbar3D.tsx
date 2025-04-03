@@ -8,7 +8,7 @@ import {
   ZoomOut, 
   RotateCcw, 
   RotateCw,
-  Cube
+  Box
 } from "lucide-react";
 
 export const DiagramToolbar3D = () => {
@@ -44,7 +44,7 @@ export const DiagramToolbar3D = () => {
         <div className="border-l h-6 mx-2" />
         <Link to="/">
           <Button variant="outline" size="sm">
-            <Cube className="h-4 w-4 mr-2" />
+            <Box className="h-4 w-4 mr-2" />
             2D View
           </Button>
         </Link>
