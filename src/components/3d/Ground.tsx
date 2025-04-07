@@ -21,7 +21,7 @@ export const Ground = () => {
         receiveShadow
       >
         <planeGeometry args={[50, 50]} />
-        <meshStandardMaterial color={"#f0f0f0"} />
+        <meshStandardMaterial color="#f0f0f0" />
       </mesh>
       
       {/* Grid */}

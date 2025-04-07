@@ -1,5 +1,5 @@
 
-import { create } from 'zustand';
+import { create } from 'zustand/vanilla';
 import { Object3D } from 'three';
 
 type SelectedObjectState = {

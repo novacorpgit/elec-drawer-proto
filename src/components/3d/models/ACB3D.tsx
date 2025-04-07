@@ -42,19 +42,19 @@ export const ACB3D = ({ component }: ComponentProps) => {
       {/* Main body - gray background */}
       <mesh castShadow position={[0, 0, 0]}>
         <boxGeometry args={[scale.x, scale.y, scale.z]} />
-        <meshStandardMaterial color={"#E0E0E0"} />
+        <meshStandardMaterial color="#E0E0E0" />
       </mesh>
       
       {/* Circuit breaker face plate */}
       <mesh castShadow position={[0, 0, scale.z/2 + 0.01]}>
         <boxGeometry args={[scale.x * 0.85, scale.y * 0.75, 0.05]} />
-        <meshStandardMaterial color={"#2E3238"} />
+        <meshStandardMaterial color="#2E3238" />
       </mesh>
       
       {/* Operating handle */}
       <mesh castShadow position={[0, scale.y * 0.15, scale.z/2 + 0.06]}>
         <boxGeometry args={[scale.x * 0.3, scale.y * 0.1, 0.05]} />
-        <meshStandardMaterial color={"#FF0000"} />
+        <meshStandardMaterial color="#FF0000" />
       </mesh>
       
       {/* Label for ON/OFF */}
@@ -79,15 +79,15 @@ export const ACB3D = ({ component }: ComponentProps) => {
       <group position={[0, -scale.y/2 - 0.1, 0]}>
         <mesh castShadow position={[-scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
         <mesh castShadow position={[0, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
         <mesh castShadow position={[scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
       </group>
       

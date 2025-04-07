@@ -48,7 +48,7 @@ export const DINRail3D = ({ component }: ComponentProps) => {
       {/* Main rail body */}
       <mesh castShadow position={[0, 0, 0]}>
         <boxGeometry args={[width, height, depth]} />
-        <meshStandardMaterial color={"#C8C8C9"} /> {/* Metallic gray */}
+        <meshStandardMaterial color="#C8C8C9" /> {/* Metallic gray */}
       </mesh>
       
       {/* Rail lip details */}
@@ -59,7 +59,7 @@ export const DINRail3D = ({ component }: ComponentProps) => {
           position={[position, height, 0]}
         >
           <boxGeometry args={[0.4, 0.06, depth]} />
-          <meshStandardMaterial color={"#9CA3AF"} />
+          <meshStandardMaterial color="#9CA3AF" />
         </mesh>
       ))}
       

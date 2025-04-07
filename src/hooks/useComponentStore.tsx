@@ -1,5 +1,5 @@
 
-import { create } from 'zustand';
+import { create } from 'zustand/vanilla';
 import { Vector3, Euler } from 'three';
 import { v4 as uuidv4 } from 'uuid';
 

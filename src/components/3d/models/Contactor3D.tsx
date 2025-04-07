@@ -38,29 +38,29 @@ export const Contactor3D = ({ component }: ComponentProps) => {
       {/* Main contactor body */}
       <mesh castShadow position={[0, 0, 0]}>
         <boxGeometry args={[scale.x, scale.y, scale.z]} />
-        <meshStandardMaterial color={"#E6E6FA"} /> {/* Lavender color */}
+        <meshStandardMaterial color="#E6E6FA" /> {/* Lavender color */}
       </mesh>
       
       {/* Terminal connections - top row */}
       <group position={[0, scale.y/2 + 0.05, 0]}>
         <mesh castShadow position={[-scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
         <mesh castShadow position={[0, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
         <mesh castShadow position={[scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
       </group>
       
       {/* Middle section with model number */}
       <mesh castShadow position={[0, 0, scale.z/2 + 0.01]}>
         <boxGeometry args={[scale.x * 0.8, scale.y * 0.4, 0.05]} />
-        <meshStandardMaterial color={"#F3E8FF"} /> {/* Lighter purple */}
+        <meshStandardMaterial color="#F3E8FF" /> {/* Lighter purple */}
       </mesh>
       <Text
         position={[0, 0, scale.z/2 + 0.06]}
@@ -74,15 +74,15 @@ export const Contactor3D = ({ component }: ComponentProps) => {
       <group position={[0, -scale.y/2 - 0.05, 0]}>
         <mesh castShadow position={[-scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
         <mesh castShadow position={[0, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
         <mesh castShadow position={[scale.x/4, 0, 0]}>
           <boxGeometry args={[scale.x * 0.15, 0.1, scale.z * 0.5]} />
-          <meshStandardMaterial color={"#B8B8B8"} />
+          <meshStandardMaterial color="#B8B8B8" />
         </mesh>
       </group>
       

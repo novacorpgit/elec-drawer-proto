@@ -48,7 +48,7 @@ export const BusBar3D = ({ component }: ComponentProps) => {
       {/* Main bus bar body */}
       <mesh castShadow position={[0, 0, 0]}>
         <boxGeometry args={[width, height, depth]} />
-        <meshStandardMaterial color={"#FFD700"} /> {/* Gold color for copper */}
+        <meshStandardMaterial color="#FFD700" /> {/* Gold color for copper */}
       </mesh>
       
       {/* Connection points */}
@@ -59,7 +59,7 @@ export const BusBar3D = ({ component }: ComponentProps) => {
           position={[position, height/2 + 0.05, 0]}
         >
           <cylinderGeometry args={[0.08, 0.08, 0.1, 8]} />
-          <meshStandardMaterial color={"#B8860B"} /> {/* Darker gold for outline */}
+          <meshStandardMaterial color="#B8860B" /> {/* Darker gold for outline */}
         </mesh>
       ))}
       
