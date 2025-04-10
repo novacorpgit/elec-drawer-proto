@@ -56,8 +56,9 @@ const Index3D = () => {
         )}
       </div>
       
-      {/* Inventory Table at the bottom */}
-      <div className="p-4 bg-gray-50 border-t">
+      {/* Inventory Table at the bottom with explicit height and styling */}
+      <div className="p-4 bg-white border-t border-gray-200 shadow-sm">
+        <h2 className="text-lg font-semibold mb-2">Component Inventory</h2>
         <InventoryTable />
       </div>
     </div>

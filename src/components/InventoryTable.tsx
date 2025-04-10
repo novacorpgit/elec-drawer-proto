@@ -47,10 +47,9 @@ export const InventoryTable = () => {
   };
   
   return (
-    <div className="p-4 bg-white border rounded-md shadow-sm">
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-medium">Component Inventory</h2>
-        <div className="flex gap-2">
+    <div className="bg-white border rounded-md shadow-sm overflow-hidden">
+      <div className="p-4 flex items-center justify-between border-b">
+        <div className="flex gap-2 items-center">
           <Input 
             placeholder="Search components..." 
             className="w-64"
@@ -58,7 +57,7 @@ export const InventoryTable = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <select 
-            className="px-3 py-2 border rounded-md"
+            className="px-3 py-2 border rounded-md bg-white"
             value={selectedPanel || ""}
             onChange={(e) => setSelectedPanel(e.target.value || null)}
           >
@@ -70,43 +69,45 @@ export const InventoryTable = () => {
         </div>
       </div>
       
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Category</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Panel</TableHead>
-            <TableHead>Available</TableHead>
-            <TableHead>Used</TableHead>
-            <TableHead className="text-right">Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredItems.map((item) => {
-            const availableCount = getAvailable(item.id);
-            return (
-              <TableRow key={item.id}>
-                <TableCell className="font-medium">{item.category}</TableCell>
-                <TableCell>{item.description}</TableCell>
-                <TableCell>{item.panelName}</TableCell>
-                <TableCell>{item.quantity - item.usedCount}</TableCell>
-                <TableCell>{item.usedCount}</TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    disabled={availableCount === 0}
-                    onClick={() => handleAddToCanvas(item)}
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Add
-                  </Button>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+      <div className="max-h-[250px] overflow-y-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="bg-gray-50">Category</TableHead>
+              <TableHead className="bg-gray-50">Description</TableHead>
+              <TableHead className="bg-gray-50">Panel</TableHead>
+              <TableHead className="bg-gray-50">Available</TableHead>
+              <TableHead className="bg-gray-50">Used</TableHead>
+              <TableHead className="bg-gray-50 text-right">Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredItems.map((item) => {
+              const availableCount = getAvailable(item.id);
+              return (
+                <TableRow key={item.id}>
+                  <TableCell className="font-medium">{item.category}</TableCell>
+                  <TableCell>{item.description}</TableCell>
+                  <TableCell>{item.panelName}</TableCell>
+                  <TableCell>{item.quantity - item.usedCount}</TableCell>
+                  <TableCell>{item.usedCount}</TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      disabled={availableCount === 0}
+                      onClick={() => handleAddToCanvas(item)}
+                    >
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };
