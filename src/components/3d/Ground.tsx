@@ -1,10 +1,10 @@
 
 import { useRef } from "react";
-import { Mesh } from "three";
+import { GridHelper } from "three";
 import { useFrame } from "@react-three/fiber";
 
 export const Ground = () => {
-  const gridRef = useRef<Mesh>(null);
+  const gridRef = useRef<GridHelper>(null);
 
   useFrame(() => {
     if (gridRef.current) {
@@ -27,7 +27,7 @@ export const Ground = () => {
       {/* Grid */}
       <gridHelper 
         ref={gridRef}
-        args={[50, 50, "#888", "#ccc"]} 
+        args={[50, 50, "#888888", "#cccccc"]} 
         position={[0, 0.01, 0]} 
       />
     </group>

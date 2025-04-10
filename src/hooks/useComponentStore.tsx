@@ -1,5 +1,5 @@
 
-import { create } from 'zustand/vanilla';
+import { create } from 'zustand';
 import { Vector3, Euler } from 'three';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,11 +13,12 @@ export interface Component3D {
   rotation: Euler;
   scale: Vector3;
   size?: [number, number, number];
+  inventoryItemId?: string; // Reference to inventory item
 }
 
 interface ComponentStore {
   components: Component3D[];
-  addComponent: (type: Component3DType, position: Vector3) => void;
+  addComponent: (type: Component3DType, position: Vector3, inventoryItemId?: string) => void;
   updateComponent: (id: string, updates: Partial<Component3D>) => void;
   removeComponent: (id: string) => void;
 }
@@ -25,7 +26,7 @@ interface ComponentStore {
 export const useComponentStore = create<ComponentStore>((set) => ({
   components: [],
   
-  addComponent: (type, position) => set((state) => {
+  addComponent: (type, position, inventoryItemId) => set((state) => {
     const defaults: Record<Component3DType, Partial<Component3D>> = {
       ACB: { 
         scale: new Vector3(1, 1, 1), 
@@ -61,6 +62,7 @@ export const useComponentStore = create<ComponentStore>((set) => ({
       position,
       rotation: new Euler(0, 0, 0),
       scale: new Vector3(1, 1, 1),
+      inventoryItemId,
       ...defaults[type]
     };
     

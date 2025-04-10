@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSelectedObject } from "@/hooks/useSelectedObject";
 import { useComponentStore, Component3D } from "@/hooks/useComponentStore";
+import { useInventoryStore } from "@/hooks/useInventoryStore";
 import { useState, useEffect } from "react";
 import { Vector3 } from "three";
+import { Trash2 } from "lucide-react";
 
 export const PropertiesPanel3D = () => {
   const { selectedObject } = useSelectedObject();
   const { components, updateComponent, removeComponent } = useComponentStore();
+  const { decrementUsed } = useInventoryStore();
   const [component, setComponent] = useState<Component3D | null>(null);
 
   useEffect(() => {
@@ -38,6 +41,12 @@ export const PropertiesPanel3D = () => {
   };
 
   const handleDelete = () => {
+    // If this component is linked to an inventory item, decrement its used count
+    if (component.inventoryItemId) {
+      decrementUsed(component.inventoryItemId);
+    }
+    
+    // Remove the component
     removeComponent(component.id);
   };
 
@@ -150,6 +159,7 @@ export const PropertiesPanel3D = () => {
           size="sm"
           onClick={handleDelete}
         >
+          <Trash2 className="h-4 w-4 mr-1" />
           Delete
         </Button>
       </div>

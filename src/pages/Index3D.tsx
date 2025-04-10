@@ -15,6 +15,7 @@ import { Enclosure3D } from '@/components/3d/models/Enclosure3D';
 import { DragControls } from '@/components/3d/DragControls';
 import { Ground } from '@/components/3d/Ground';
 import { useSelectedObject } from '@/hooks/useSelectedObject';
+import { InventoryTable } from '@/components/InventoryTable';
 
 const Index3D = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -53,6 +54,11 @@ const Index3D = () => {
         {selectedObject && (
           <PropertiesPanel3D />
         )}
+      </div>
+      
+      {/* Inventory Table at the bottom */}
+      <div className="p-4 bg-gray-50 border-t">
+        <InventoryTable />
       </div>
     </div>
   );
